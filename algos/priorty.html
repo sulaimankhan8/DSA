@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Priority Scheduling (Non-Preemptive)</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid black; padding: 8px; text-align: center; }
+        th { background-color: #f2f2f2; }
+        input { width: 60px; padding: 5px; }
+        .gantt { display: flex; margin-top: 20px; }
+        .gantt div { border: 1px solid black; padding: 10px; margin-right: 2px; background: lightblue; }
+    </style>
+</head>
+<body>
+
+    <h2>Priority Scheduling (Non-Preemptive)</h2>
+    
+    <label>Number of Processes:</label>
+    <input type="number" id="numProcesses" value="4">
+    <button onclick="generateInputs()">Generate Table</button>
+
+    <table id="processTable"></table>
+    <button onclick="calculatePriorityScheduling()">Run Scheduling</button>
+
+    <h3>Execution Sequence:</h3>
+    <div id="executionSequence"></div>
+
+    <h3>Process Table:</h3>
+    <table id="resultTable"></table>
+
+    <h3>Gantt Chart:</h3>
+    <div id="ganttChart" class="gantt"></div>
+
+    <script>
+        function generateInputs() {
+            let num = document.getElementById("numProcesses").value;
+            let table = document.getElementById("processTable");
+            table.innerHTML = `<tr>
+                <th>PID</th> <th>Arrival Time</th> <th>Burst Time</th> <th>Priority</th>
+            </tr>`;
+            for (let i = 0; i < num; i++) {
+                table.innerHTML += `<tr>
+                    <td>P${i+1}</td>
+                    <td><input type="number" id="at${i}" value="0"></td>
+                    <td><input type="number" id="bt${i}" value="1"></td>
+                    <td><input type="number" id="pr${i}" value="1"></td>
+                </tr>`;
+            }
+        }
+
+        function calculatePriorityScheduling() {
+            let num = document.getElementById("numProcesses").value;
+            let processes = [];
+
+            for (let i = 0; i < num; i++) {
+                let at = parseInt(document.getElementById(`at${i}`).value);
+                let bt = parseInt(document.getElementById(`bt${i}`).value);
+                let pr = parseInt(document.getElementById(`pr${i}`).value);
+                processes.push({ pid: i + 1, arrivalTime: at, burstTime: bt, priority: pr });
+            }
+
+            let n = processes.length;
+            let completionTime = new Array(n).fill(0);
+            let turnaroundTime = new Array(n).fill(0);
+            let waitingTime = new Array(n).fill(0);
+            let executionSequence = [];
+            let remainingProcesses = [...processes];
+
+            let currentTime = 0;
+            let ganttChart = document.getElementById("ganttChart");
+            ganttChart.innerHTML = "";
+
+            while (remainingProcesses.length > 0) {
+                let availableProcesses = remainingProcesses.filter(p => p.arrivalTime <= currentTime);
+
+                if (availableProcesses.length === 0) {
+                    let nextArrival = Math.min(...remainingProcesses.map(p => p.arrivalTime));
+                    currentTime = nextArrival;
+                    continue;
+                }
+
+                availableProcesses.sort((a, b) => a.priority - b.priority || a.arrivalTime - b.arrivalTime);
+                let process = availableProcesses[0];
+
+                executionSequence.push(`P${process.pid}`);
+                ganttChart.innerHTML += `<div>P${process.pid} (${currentTime}-${currentTime + process.burstTime})</div>`;
+
+                currentTime += process.burstTime;
+                completionTime[process.pid - 1] = currentTime;
+                turnaroundTime[process.pid - 1] = completionTime[process.pid - 1] - process.arrivalTime;
+                waitingTime[process.pid - 1] = turnaroundTime[process.pid - 1] - process.burstTime;
+
+                remainingProcesses = remainingProcesses.filter(p => p.pid !== process.pid);
+            }
+
+            document.getElementById("executionSequence").innerText = executionSequence.join(" → ");
+
+            let resultTable = document.getElementById("resultTable");
+            resultTable.innerHTML = `<tr>
+                <th>PID</th> <th>AT</th> <th>BT</th> <th>P</th> <th>CT</th> <th>TAT</th> <th>WT</th>
+            </tr>`;
+            for (let i = 0; i < n; i++) {
+                resultTable.innerHTML += `<tr>
+                    <td>P${i + 1}</td>
+                    <td>${processes[i].arrivalTime}</td>
+                    <td>${processes[i].burstTime}</td>
+                    <td>${processes[i].priority}</td>
+                    <td>${completionTime[i]}</td>
+                    <td>${turnaroundTime[i]}</td>
+                    <td>${waitingTime[i]}</td>
+                </tr>`;
+            }
+        }
+    </script>
+
+</body>
+</html>

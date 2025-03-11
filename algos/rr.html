@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Round Robin Scheduling</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid black; padding: 8px; text-align: center; }
+        th { background-color: #f2f2f2; }
+        input { width: 60px; padding: 5px; }
+        .gantt { display: flex; margin-top: 20px; }
+        .gantt div { border: 1px solid black; padding: 10px; margin-right: 2px; background: lightblue; }
+    </style>
+</head>
+<body>
+    <h2>Round Robin Scheduling</h2>
+    
+    <label>Number of Processes:</label>
+    <input type="number" id="numProcesses" value="4">
+    <label>Time Quantum:</label>
+    <input type="number" id="timeQuantum" value="2">
+    <button onclick="generateInputs()">Generate Table</button>
+
+    <table id="processTable"></table>
+    <button onclick="calculateRoundRobin()">Run Scheduling</button>
+
+    <h3>Execution Sequence:</h3>
+    <div id="executionSequence"></div>
+
+    <h3>Process Table:</h3>
+    <table id="resultTable"></table>
+
+    <h3>Gantt Chart:</h3>
+    <div id="ganttChart" class="gantt"></div>
+
+    <script>
+        function generateInputs() {
+            let num = document.getElementById("numProcesses").value;
+            let table = document.getElementById("processTable");
+            table.innerHTML = `<tr>
+                <th>PID</th> <th>Arrival Time</th> <th>Burst Time</th>
+            </tr>`;
+            for (let i = 0; i < num; i++) {
+                table.innerHTML += `<tr>
+                    <td>P${i+1}</td>
+                    <td><input type="number" id="at${i}" value="0"></td>
+                    <td><input type="number" id="bt${i}" value="1"></td>
+                </tr>`;
+            }
+        }
+
+        function calculateRoundRobin() {
+            let num = document.getElementById("numProcesses").value;
+            let quantum = parseInt(document.getElementById("timeQuantum").value);
+            let processes = [];
+
+            for (let i = 0; i < num; i++) {
+                let at = parseInt(document.getElementById(`at${i}`).value);
+                let bt = parseInt(document.getElementById(`bt${i}`).value);
+                processes.push({ pid: i + 1, arrivalTime: at, burstTime: bt, remainingTime: bt });
+            }
+
+            let time = 0;
+            let queue = [];
+            let executionSequence = [];
+            let ganttChart = document.getElementById("ganttChart");
+            ganttChart.innerHTML = "";
+
+            processes.sort((a, b) => a.arrivalTime - b.arrivalTime);
+            queue.push(...processes);
+
+            while (queue.length > 0) {
+                let process = queue.shift();
+                if (process.remainingTime > quantum) {
+                    ganttChart.innerHTML += `<div>P${process.pid} (${time}-${time + quantum})</div>`;
+                    executionSequence.push(`P${process.pid}`);
+                    process.remainingTime -= quantum;
+                    time += quantum;
+                    queue.push(process);
+                } else {
+                    ganttChart.innerHTML += `<div>P${process.pid} (${time}-${time + process.remainingTime})</div>`;
+                    executionSequence.push(`P${process.pid}`);
+                    time += process.remainingTime;
+                    process.remainingTime = 0;
+                }
+            }
+
+            document.getElementById("executionSequence").innerText = executionSequence.join(" → ");
+        }
+    </script>
+</body>
+</html>

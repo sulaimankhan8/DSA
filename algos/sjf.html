@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SJF Scheduling</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid black; padding: 8px; text-align: center; }
+        th { background-color: #f2f2f2; }
+        input { width: 60px; padding: 5px; }
+        .gantt { display: flex; margin-top: 20px; }
+        .gantt div { border: 1px solid black; padding: 10px; margin-right: 2px; background: lightblue; }
+    </style>
+</head>
+<body>
+
+    <h2>SJF Scheduling</h2>
+    
+    <label>Number of Processes:</label>
+    <input type="number" id="numProcesses" value="4">
+    <button onclick="generateTable()">Generate Table</button>
+    
+    <h3>Enter Process Details:</h3>
+    <table id="processTable"></table>
+    <button onclick="runSJF()">Run Scheduling</button>
+    
+    <h3>Execution Order:</h3>
+    <div id="executionOrder"></div>
+    
+    <h3>Process Table:</h3>
+    <table id="resultTable"></table>
+    
+    <h3>Gantt Chart:</h3>
+    <div id="ganttChart" class="gantt"></div>
+    
+    <script>
+        function generateTable() {
+            let num = document.getElementById("numProcesses").value;
+            let table = `<tr><th>Process ID</th><th>Arrival Time</th><th>Burst Time</th></tr>`;
+            for (let i = 0; i < num; i++) {
+                table += `<tr>
+                    <td>P${i + 1}</td>
+                    <td><input type="number" id="arrival${i}" value="0"></td>
+                    <td><input type="number" id="burst${i}" value="1"></td>
+                </tr>`;
+            }
+            document.getElementById("processTable").innerHTML = table;
+        }
+
+        function runSJF() {
+            let num = document.getElementById("numProcesses").value;
+            let processes = [];
+
+            for (let i = 0; i < num; i++) {
+                processes.push({
+                    id: `P${i + 1}`,
+                    arrival: parseInt(document.getElementById(`arrival${i}`).value),
+                    burst: parseInt(document.getElementById(`burst${i}`).value)
+                });
+            }
+
+            processes.sort((a, b) => a.arrival - b.arrival);
+            let currentTime = 0, completed = 0;
+            let completion = [], turnaround = [], waiting = [], execution = [];
+            let visited = new Array(num).fill(false);
+
+            while (completed < num) {
+                let minBurst = Infinity, index = -1;
+                for (let i = 0; i < num; i++) {
+                    if (!visited[i] && processes[i].arrival <= currentTime && processes[i].burst < minBurst) {
+                        minBurst = processes[i].burst;
+                        index = i;
+                    }
+                }
+                if (index === -1) {
+                    execution.push("Idle");
+                    currentTime++;
+                } else {
+                    let p = processes[index];
+                    execution.push(p.id);
+                    completion[index] = currentTime + p.burst;
+                    turnaround[index] = completion[index] - p.arrival;
+                    waiting[index] = turnaround[index] - p.burst;
+                    currentTime = completion[index];
+                    visited[index] = true;
+                    completed++;
+                }
+            }
+            displayResults(processes, completion, turnaround, waiting, execution);
+        }
+
+        function displayResults(processes, completion, turnaround, waiting, execution) {
+            let table = `<tr><th>Process ID</th><th>Arrival</th><th>Burst</th><th>Completion</th><th>Turnaround</th><th>Waiting</th></tr>`;
+            processes.forEach((p, i) => {
+                table += `<tr>
+                    <td>${p.id}</td>
+                    <td>${p.arrival}</td>
+                    <td>${p.burst}</td>
+                    <td>${completion[i]}</td>
+                    <td>${turnaround[i]}</td>
+                    <td>${waiting[i]}</td>
+                </tr>`;
+            });
+            document.getElementById("resultTable").innerHTML = table;
+            document.getElementById("executionOrder").innerText = execution.join(" → ");
+            document.getElementById("ganttChart").innerHTML = execution.map(p => `<div>${p}</div>`).join("");
+        }
+    </script>
+
+</body>
+</html>

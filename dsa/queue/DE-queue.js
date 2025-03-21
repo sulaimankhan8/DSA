@@ -102,4 +102,28 @@ console.log(dq.getFront());
 console.log(dq.getRear()); 
 dq.deleteFront();
 console.log(dq.getFront()); 
+console.log("-----------------------------------------------------"); 
 
+//----------------------------------------------------------------------
+//Palindrome Checker using Deque
+
+
+function palandrome(str){
+    let n = str.length;
+ let deq= new Deque(n);
+ for(let s of str){
+    deq.insertFront(s);
+ }
+
+ while(!deq.isEmpty()){
+    let front=deq.deleteFront();
+      if(deq.isEmpty()) break;      
+    let rear=deq.deleteLast();
+      if(front !== rear) return false;    
+}
+return true;
+}
+
+console.log(palandrome("carrac"));
+console.log(palandrome("plain"));
+console.log(palandrome("level"));

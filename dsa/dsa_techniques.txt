@@ -1,0 +1,114 @@
+
+✅ CORE DSA TECHNIQUES
+
+1. Brute Force
+- Try all possibilities and pick the best.
+- Works for small inputs but inefficient.
+- Example: Check every pair for a sum.
+
+2. Greedy Algorithms
+- Make the best local choice at each step.
+- Works for problems like:
+  - Activity selection, Huffman coding, Kruskal’s MST, Fractional Knapsack.
+
+3. Divide and Conquer
+- Break into subproblems, solve each, combine results.
+- Examples:
+  - Merge Sort, Quick Sort, Binary Search, Closest pair of points.
+
+4. Recursion
+- A function calling itself to break down problems.
+- Classic for:
+  - Tower of Hanoi, Fibonacci numbers, Backtracking.
+
+5. Backtracking
+- Recursively try choices, revert if not valid.
+- Used for:
+  - N-Queens problem, Sudoku solver, Permutations/combinations.
+
+6. Dynamic Programming (DP)
+- Break problems into overlapping subproblems and store results.
+- Two ways:
+  - Top-down (memoization)
+  - Bottom-up (tabulation)
+- Example:
+  - Fibonacci, Longest Common Subsequence, Knapsack problem.
+
+7. Sliding Window
+- Move a window over data to find subarray/substring solutions efficiently.
+- Examples:
+  - Maximum subarray sum, Longest substring without repeating chars.
+
+8. Two Pointers
+- Move two pointers from opposite ends or same direction to reduce complexity.
+- Examples:
+  - Reverse a string, Pair sum in sorted arrays, Trap rainwater.
+
+9. Binary Search
+- Repeatedly divide sorted data to find target.
+- Examples:
+  - Search in rotated sorted array, Find square root.
+
+10. Bit Manipulation
+- Use bitwise operations for optimization.
+- Examples:
+  - Check if a number is a power of two, Find single non-repeating number.
+
+11. Graph Algorithms
+- BFS (Breadth First Search)
+- DFS (Depth First Search)
+- Dijkstra’s Shortest Path
+- Bellman-Ford
+- Floyd-Warshall
+- Kruskal's & Prim’s MST
+- Topological Sorting
+- Union-Find / Disjoint Set
+
+12. Heap / Priority Queue
+- For finding k-largest/smallest elements, merge k-sorted lists, scheduling problems.
+
+13. Trie
+- Efficient search structure for words and prefixes.
+- Used in autocomplete, dictionary search, longest common prefix.
+
+14. Segment Tree & Fenwick Tree (BIT)
+- For range queries (sum, min, max) with updates.
+
+15. Prefix Sum / Difference Array
+- Precompute sums or differences for faster queries.
+
+16. Stack / Monotonic Stack
+- Next Greater Element problems, Largest Rectangle in Histogram.
+
+17. Queue / Deque / Monotonic Queue
+- Used in sliding window maximum, BFS, 0-1 BFS optimization.
+
+18. Hashing
+- Frequency counts, quick lookup, anagrams.
+
+19. Disjoint Set (Union-Find)
+- Used in cycle detection, Kruskal’s MST, and connectivity problems.
+
+20. Mathematical techniques
+- GCD / LCM, Prime sieves (Sieve of Eratosthenes), Modular arithmetic, Combinatorics (nCr).
+
+⚡ Summary Table:
+| Technique                 | Common Use                                     |
+|---------------------------|------------------------------------------------|
+| Brute Force               | Small cases, first attempt                     |
+| Greedy                    | Optimization problems with local best choice   |
+| Divide & Conquer          | Sorts, Search                                  |
+| Recursion / Backtracking  | Explore all possibilities (N-Queens, Sudoku)   |
+| DP                        | Overlapping subproblems (Knapsack, LCS)        |
+| Sliding Window            | Substring or subarray problems                 |
+| Two Pointers              | Sorted arrays or strings                       |
+| Binary Search             | Search in sorted or monotonic conditions       |
+| Bit Manipulation          | Optimization, parity, power-of-two checks      |
+| Graph algorithms          | Connectivity, paths, traversal                 |
+| Heap / Priority Queue     | Kth largest/smallest, shortest paths           |
+| Trie                      | Prefix-based problems                          |
+| Segment/Fenwick Tree      | Range queries with updates                     |
+| Monotonic Stack / Queue   | Next greater/smaller elements                  |
+| Hashing                   | Frequency & lookup                             |
+| Union-Find                | Connectivity, cycle detection                  |
+| Math                      | GCD, primes, modular arithmetic                |

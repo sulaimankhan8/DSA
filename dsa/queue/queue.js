@@ -94,9 +94,19 @@ Queues.prototype.frontElement=function(){
     
     return this.front.data;
 }
+Queues.prototype.print=function(){
+    let current=this.front;
+    let res="";
+    while(current){
+        res += current.data +"=>";
+        current=current.next;
+    }
+    console.log(res +"NUll");
+}
 let q1 = new Queues();
 q1.enqueue(5);
 q1.enqueue(15);
 console.log(q1.dequeue()); 
 console.log(q1.frontElement()); 
 console.log(q1.isEmpty()); 
+q1.print();

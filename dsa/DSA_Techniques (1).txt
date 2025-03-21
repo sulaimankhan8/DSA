@@ -1,0 +1,335 @@
+====================================================
+                ✅ CORE DSA TECHNIQUES
+         Complete Guide with Explanations & Algorithms
+====================================================
+
+1️⃣ Brute Force
+----------------------------------------------------
+- Idea: Try every possible solution and pick the best result.
+- Complexity: Often O(n²), O(n³), or worse.
+- When to use: Small input sizes or as a starting solution.
+- Example: Check every pair for a sum in an array.
+- Algorithm Used: Nested loops or recursion with all choices tried.
+
+2️⃣ Greedy Algorithms
+----------------------------------------------------
+- Principle: Choose the locally optimal option at each step.
+- Not all problems can be solved greedily unless proven by:
+  - Greedy-choice property & Optimal substructure.
+- Famous Algorithms:
+  - Activity Selection Problem (Earliest finish time first)
+  - Huffman Encoding Tree (Min-heap based)
+  - Kruskal’s MST (Union-Find for cycle detection)
+  - Fractional Knapsack (Sort by value/weight ratio)
+
+3️⃣ Divide and Conquer
+----------------------------------------------------
+- Split the problem into smaller pieces, solve them recursively, then combine.
+- Used for sorting, searching, and geometry problems.
+- Common Algorithms:
+  - Merge Sort (O(n log n))
+  - Quick Sort (Expected O(n log n))
+  - Binary Search (O(log n))
+  - Closest Pair of Points (O(n log n))
+
+4️⃣ Recursion
+----------------------------------------------------
+- Function calls itself with smaller subproblems until reaching a base case.
+- Can lead to exponential complexity if not optimized.
+- Algorithms Using Recursion:
+  - Tower of Hanoi (O(2^n))
+  - Fibonacci Sequence (Exponential without memoization)
+  - Factorial (O(n))
+
+5️⃣ Backtracking
+----------------------------------------------------
+- Recursive trial-and-error with reverting choices ("undo" step).
+- Used when all solutions or one valid solution needs to be found.
+- Algorithms:
+  - N-Queens problem
+  - Sudoku solver
+  - Generating permutations & combinations (recursive calls with choice revert)
+
+6️⃣ Dynamic Programming (DP)
+----------------------------------------------------
+- Store solutions to subproblems to avoid re-computation.
+- Two Approaches:
+  - Top-down (Memoization)
+  - Bottom-up (Tabulation)
+- Algorithms:
+  - Longest Common Subsequence (O(n*m))
+  - Knapsack Problem (0/1 Knapsack DP)
+  - Coin Change (Minimum coins or number of ways)
+  - Edit Distance (Levenshtein Distance)
+
+7️⃣ Sliding Window
+----------------------------------------------------
+- Use a fixed-size or variable-size window to find optimal subarrays or substrings.
+- Algorithms:
+  - Kadane’s Algorithm (Max subarray sum in O(n))
+  - Longest substring without repeating characters (HashSet + window expansion)
+  - Sliding Window Maximum (Deque/Monotonic Queue based)
+
+8️⃣ Two Pointers
+----------------------------------------------------
+- Two pointers moving inward or outward to reduce complexity.
+- Algorithms:
+  - Merge Two Sorted Arrays
+  - Reverse a String
+  - Trap Rainwater (Two pointer method)
+
+9️⃣ Binary Search
+----------------------------------------------------
+- Works on sorted/monotonic arrays or answers.
+- Algorithms:
+  - Standard Binary Search
+  - Lower Bound / Upper Bound search
+  - Search in Rotated Sorted Array
+  - Binary Search on Answer (Minimize/Maximize search ranges)
+
+🔟 Bit Manipulation
+----------------------------------------------------
+- Using bitwise operators for efficient operations.
+- Algorithms:
+  - Check if number is a power of two (n & (n-1) == 0)
+  - Find single non-repeating number (XOR)
+  - Count set bits (Kernighan’s Algorithm)
+  - Swap numbers without temp using XOR
+
+1️⃣1️⃣ Graph Algorithms
+----------------------------------------------------
+- BFS (Queue based, level-by-level traversal)
+- DFS (Recursive or iterative using stack)
+- Dijkstra’s Algorithm (Min-heap based for shortest paths)
+- Bellman-Ford (Detect negative cycles)
+- Floyd-Warshall (All pairs shortest paths)
+- Kruskal’s MST (Sort edges + Union-Find)
+- Prim’s MST (Min-heap based)
+- Topological Sort (Kahn’s Algorithm or DFS-based)
+- Union-Find (Disjoint Set Union for connectivity and cycle detection)
+
+1️⃣2️⃣ Heap / Priority Queue
+----------------------------------------------------
+- Retrieve smallest/largest element efficiently (log n complexity).
+- Algorithms:
+  - Heap Sort
+  - Kth Largest Element
+  - Merge k Sorted Lists
+  - Median of Data Stream
+
+1️⃣3️⃣ Trie (Prefix Tree)
+----------------------------------------------------
+- Stores strings character by character in tree form.
+- Used for:
+  - Autocomplete
+  - Spell checking
+  - Longest common prefix finding
+  - Search in dictionaries (O(L) complexity where L is word length)
+
+1️⃣4️⃣ Segment Tree & Fenwick Tree (BIT)
+----------------------------------------------------
+- Data structures for dynamic range queries with updates.
+- Segment Tree: O(log n) updates & queries
+- Fenwick Tree: O(log n) updates & queries
+- Applications:
+  - Range sum, Range min/max queries
+  - Frequency queries
+  - Inversion count
+
+1️⃣5️⃣ Prefix Sum / Difference Array
+----------------------------------------------------
+- Precompute prefix sums for O(1) range queries.
+- Difference Array used for efficient range updates.
+- Applications:
+  - Range sum queries
+  - Applying multiple range updates efficiently
+
+1️⃣6️⃣ Stack / Monotonic Stack
+----------------------------------------------------
+- LIFO structure.
+- Applications:
+  - Parentheses matching
+  - Largest rectangle in histogram (O(n))
+  - Next Greater/Smaller Element (O(n) using stack)
+
+1️⃣7️⃣ Queue / Deque / Monotonic Queue
+----------------------------------------------------
+- FIFO (Queue), Double-ended structure (Deque)
+- Applications:
+  - BFS traversal
+  - Sliding window maximum/minimum
+  - 0-1 BFS (Used for shortest path when edge weights are 0 or 1)
+
+1️⃣8️⃣ Hashing
+----------------------------------------------------
+- Map keys to values in O(1) expected time.
+- Applications:
+  - Frequency count
+  - Anagram detection
+  - Caching results (Memoization in DP)
+  - Hash-based lookup tables
+
+1️⃣9️⃣ Disjoint Set (Union-Find)
+----------------------------------------------------
+- Data structure to manage disjoint sets.
+- Algorithms:
+  - Union by rank & Path compression (Optimizations)
+  - Used in cycle detection, Kruskal’s MST, connectivity queries
+
+2️⃣0️⃣ Mathematical Techniques
+----------------------------------------------------
+- GCD (Euclid’s Algorithm)
+- LCM (lcm(a,b) = (a*b) / gcd(a,b))
+- Prime Sieves (Sieve of Eratosthenes for O(n log log n))
+- Modular Arithmetic:
+  - Fast Exponentiation (Binary exponentiation)
+  - Modular inverse (Fermat’s little theorem)
+  - nCr modulo (Precompute factorial & inverse)
+- Combinatorics:
+  - Permutations & Combinations
+  - Counting paths & subsets
+
+====================================================
+🚀 Save and master this — every major DSA concept in one place! 
+====================================================
+
+⚡ SUMMARY TABLE ⚡
+
+| Technique                 | Common Use                                         |
+|---------------------------|----------------------------------------------------|
+| Brute Force               | Small inputs, first attempt                        |
+| Greedy                    | Local optimal -> global optimal problems           |
+| Divide & Conquer          | Sorts, Searches, Closest point problems            |
+| Recursion / Backtracking  | Generate all possibilities (Perms, Combos, Sudoku) |
+| Dynamic Programming       | Overlapping subproblems (Knapsack, LCS)            |
+| Sliding Window            | Subarray/substring problems                        |
+| Two Pointers              | Sorted arrays, paired problems                     |
+| Binary Search             | Search & optimization in monotonic conditions      |
+| Bit Manipulation          | Optimization, toggle/check bits, parity checks     |
+| Graph Algorithms          | Traversal, paths, connectivity                     |
+| Heap / Priority Queue     | Scheduling, median, top k elements                 |
+| Trie                      | Prefix-based string problems                       |
+| Segment/Fenwick Tree      | Dynamic range queries                              |
+| Monotonic Stack / Queue   | Next greater/smaller element, histogram problems   |
+| Hashing                   | Lookup, frequency analysis                         |
+| Union-Find (Disjoint Set) | Connectivity, cycle detection                      |
+| Mathematical Techniques   | GCD, LCM, primes, combinatorics                    |
+
+====================================================
+👉 Master these and you'll crush DSA interviews! 💪
+====================================================
+
+
+
+
+
+
+
+====================================================
+                  DATA STRUCTURES & ALGORITHMS
+                      MASTER CHEAT SHEET
+====================================================
+
+📁 1. CORE DATA STRUCTURES:
+-----------------------------------------
+✅ Arrays  
+✅ Strings  
+✅ Linked Lists (Singly / Doubly)  
+✅ Stacks (LIFO)  
+✅ Queues (FIFO)  
+✅ Priority Queues & Heaps (Min-Heap, Max-Heap)  
+✅ HashMaps / HashTables / HashSets  
+✅ Trees  
+   - Binary Trees  
+   - Binary Search Trees  
+   - AVL Trees  
+   - Segment Trees  
+   - Fenwick Tree (BIT)  
+✅ Tries  
+✅ Graphs (Adjacency List, Adjacency Matrix)  
+✅ Disjoint Set Union (DSU / Union-Find)  
+
+----------------------------------------------------
+📁 2. ALGORITHM TECHNIQUES:
+----------------------------------------------------
+✅ Two Pointers  
+✅ Sliding Window  
+✅ Binary Search  
+✅ Recursion  
+✅ Backtracking  
+✅ Divide & Conquer  
+✅ Dynamic Programming (DP)  
+   - Memoization (Top Down)  
+   - Tabulation (Bottom Up)  
+✅ Bit Manipulation  
+✅ Greedy Algorithms  
+✅ Graph Algorithms  
+   - BFS (Breadth-First Search)  
+   - DFS (Depth-First Search)  
+   - Dijkstra’s Algorithm  
+   - Bellman-Ford Algorithm  
+   - Floyd-Warshall Algorithm  
+   - Topological Sort  
+   - Union-Find / DSU  
+✅ Fast Exponentiation  
+✅ Kadane’s Algorithm  
+✅ KMP Algorithm (String Matching)  
+✅ Rabin-Karp (String Search)  
+✅ Z-Algorithm (Pattern Matching)  
+✅ Prefix Sum / Suffix Sum  
+
+----------------------------------------------------
+📁 3. COMMON PROBLEM PATTERNS:
+----------------------------------------------------
+✅ Subarray problems  
+✅ Combinational subsets  
+✅ Permutations  
+✅ Matrix traversal  
+✅ Interval problems (merge intervals, meeting rooms)  
+✅ Stock Buy-Sell problems  
+✅ Knapsack problems  
+✅ Coin change problems  
+
+----------------------------------------------------
+📁 4. COMPLEXITY CHEAT SHEET:
+----------------------------------------------------
+✅ Array search: O(n)  
+✅ Binary search: O(log n)  
+✅ Sorting: O(n log n)  
+✅ BFS/DFS: O(V + E)  
+✅ Building a heap: O(n)  
+✅ Trie Insert/Search: O(L) (L = length of word)  
+✅ DP: Often O(n^2) or O(n*m)  
+✅ Matrix Traversal: O(n*m)  
+
+----------------------------------------------------
+📁 5. TIPS:
+----------------------------------------------------
+✅ Always start with brute force.  
+✅ Look for optimization using prefix sums or binary search.  
+✅ Use sliding window for subarrays.  
+✅ If "choose or not choose" appears, think recursion or backtracking.  
+✅ Think of dynamic programming when subproblems overlap.  
+✅ Sort intervals for interval-based problems.  
+✅ Hashing helps detect duplicates or store states quickly.  
+
+----------------------------------------------------
+📁 6. INTERVIEW MUST-HAVE:
+----------------------------------------------------
+✅ Reverse Linked List  
+✅ Merge Two Sorted Lists  
+✅ Detect Cycle in Linked List (Floyd’s Algorithm)  
+✅ Find Kth largest element  
+✅ Valid Parentheses (Stack)  
+✅ Top K frequent elements (Heap / Map)  
+✅ Word Break Problem (DP)  
+✅ Longest Common Subsequence  
+✅ Longest Palindromic Substring  
+✅ Rotate Array  
+✅ Missing Number / Duplicate Number problems  
+
+----------------------------------------------------
+✨ REMEMBER:  
+ PRACTICE. PATIENCE. PATTERN RECOGNITION. ✨
+
+----------------------------------------------------

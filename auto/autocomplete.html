@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Autocomplete Dictionary</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 40px;
+    }
+    input {
+      padding: 10px;
+      font-size: 18px;
+      width: 300px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 10px;
+      width: 300px;
+      border: 1px solid #ccc;
+    }
+    li {
+      padding: 8px;
+      border-bottom: 1px solid #eee;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🔍 English Word Autocomplete</h2>
+  <input id="search" placeholder="Start typing..." />
+  <ul id="suggestions"></ul>
+
+  <script src="trie.js"></script>
+  <script>
+    const input = document.getElementById("search");
+    const list = document.getElementById("suggestions");
+    const trie = new AutoComplete();
+
+    
+    fetch("https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt")
+      .then(res => res.text())
+      .then(data => {
+        const words = data.split("\n");
+        for (let word of words) {
+          if (word) trie.insert(word.trim().toLowerCase());
+        }
+        console.log("📘 Dictionary loaded");
+        trie.printTree(); 
+      });
+
+    // On user typing
+    input.addEventListener("input", () => {
+        const fullText = input.value.toLowerCase();
+  const words = fullText.split(" ");
+  const lastWord = words[words.length - 1];
+
+  if (lastWord === "") {
+    list.innerHTML = ""; // if space just typed, hide suggestions
+    return;
+  }
+
+  const results = trie.autocomplete(lastWord).slice(0, 10);
+  list.innerHTML = results.map(word => `<li>${word}</li>`).join("");
+});
+  </script>
+
+</body>
+</html>
